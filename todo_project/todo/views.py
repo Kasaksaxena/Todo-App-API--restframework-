@@ -8,8 +8,11 @@ from django.shortcuts import get_object_or_404
 
 #create + get all todos
 @api_view(['GET','POST'])
-@permission_classes(['permissions.IsAuthenticated'])
+@permission_classes([permissions.IsAuthenticated])
 def todo_list_create(request):
+    print("==> AUTH DEBUG")
+    print("User:",request.user)
+    print("Auth:",request.auth)
     if request.method=='GET':
         todos=Todo.objects.filter(user=request.user)
         serializer=TodoSerializer(todos,many=True)
